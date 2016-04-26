@@ -1,10 +1,56 @@
+var readline = require('readline')
 const Water = require('./Water.js')
 const Ships = require('./Ships.js')
 
 // console.log(Water.test());
-// console.log(Water.checkAt("B6"));
 // console.log(Ships.test());
 
-
 //game play
-  
+
+function info() {
+  console.log('Info:');
+  console.log('A5       - hits a target square. Valid targets A-J, 1-10');
+  console.log('restart  - Restarts the game');
+  console.log('quit     - Quits the game');
+  console.log('info    - Prints this list');
+}
+
+function quit() {
+  console.log('Goodbye!');
+  process.exit(0);
+}
+
+function restart() {
+  Water.new();
+  console.log('New Game');
+}
+
+//command line value to instructions
+var letters = readline.createInterface(process.stdin, process.stdout);
+
+letters.setPrompt('Battleship> ');
+
+Water.new();
+info();
+
+letters.prompt();
+
+letters.on('line', function(line) {
+  switch(line.trim()) {
+    case 'quit':
+      quit();
+      break;
+    case 'restart':
+      restart();
+      break;
+    case 'info':
+      info();
+      break;
+    default:
+      Water.checkAt(letters);
+      break;
+  }
+  letters.prompt();
+}).on('close', function() {
+  quit();
+});

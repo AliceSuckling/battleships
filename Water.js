@@ -1,9 +1,12 @@
 module.exports = (function() {
   var Water = {};
 
-  var water = [];
-  for(var i=0; i<10; i++) {
-    water[i] = new Array(10);
+  Water.new = function() {
+    var water = [];
+    for(var i=0; i<10; i++) {
+      water[i] = new Array(10);
+    }
+    return Water;
   }
 
   Water.test = function() {
@@ -20,7 +23,6 @@ module.exports = (function() {
         var row = guess.charAt(0);
         var col = guess.charAt(1);
       }
-      return row + col;
     }
 
     var translateRowNumber = function(row) {
@@ -48,17 +50,17 @@ module.exports = (function() {
       }
     }
 
-    if ((row, col) == undefined) {
+    if (row + col == undefined) {
       return "miss";
     }
-    if ((row, col) == 1) {
+    if (row + col == 1) {
       return "hit";
     }
     else {
       return "you already tried here";
     }
-
-    return water[row][col];
+    row = row + 1;
+    col = col + 1;
+    // return water[row][col];
   }
-  return Water;
 })();
