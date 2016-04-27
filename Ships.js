@@ -6,7 +6,7 @@ module.exports = (function() {
   }
 
 //Ships have 5 properties: size, hits, sunk, direction & location
-  Ships.new = function(squares) {
+  Ships.build = function(squares) {
     var size = squares;
     var hits = 0;
     var sunk = function() {
@@ -20,28 +20,30 @@ module.exports = (function() {
     var direction = Math.floor(Math.random() * 2);
     //horizontal
     if (direction === 1) {
-      var row = Math.floor(Math.random() * this.Water);
-      var column = Math.floor(Math.random() * (this.Water - this.size + 1));
+      var row = Math.floor(Math.random() * this.grid);
+      var col = Math.floor(Math.random() * (this.grid - this.size + 1));
     //vertical
     } else {
-        var row = Math.floor(Math.random() * (this.Water - this.size + 1));
-        var column = Math.floor(Math.random() * this.Water);
+        var row = Math.floor(Math.random() * (this.grid - this.size + 1));
+        var col = Math.floor(Math.random() * this.grid);
     };
     //random location
     var location = [];
     for (var i = 0; i < this.size; i++) {
       if (direction === 1) {
-        location.push(row + "" + (column + i));
+        location.push(row + "" + (col + i));
       } else {
-        location.push((row + i) + "" + column);
+        location.push((row + i) + "" + col);
       }
     };
   }
 
 //create the three ships
-  var battleship = Ships.new(5);
-  var destroyer = Ships.new(4);
-  var destroyer2 = Ships.new(4);
+  Ships.create = function() {
+    var battleship = Ships.build(5);
+    var destroyer = Ships.build(4);
+    var destroyer2 = Ships.build(4);
+  }
 
   return Ships;
 })();

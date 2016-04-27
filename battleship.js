@@ -21,7 +21,8 @@ function quit() {
 }
 
 function restart() {
-  Water.new();
+  // Water.new();
+  Ships.create();
   console.log('New Game');
 }
 
@@ -30,7 +31,6 @@ var letters = readline.createInterface(process.stdin, process.stdout);
 
 letters.setPrompt('Battleship> ');
 
-Water.new();
 info();
 
 letters.prompt();
@@ -47,7 +47,7 @@ letters.on('line', function(line) {
       info();
       break;
     default:
-      Water.checkAt(letters);
+      console.log(Water.checkAt(line));
       break;
   }
   letters.prompt();
