@@ -5,6 +5,9 @@ module.exports = (function() {
   const OCCUPIED_BY_SHIP = 1;
   const MISSED_WATER = 2;
   const HIT_SHIP = 3;
+
+  const SUNK_DESTROYER = 12;
+  const SUNK_BATTLESHIP = 15;
 //the grid
   var grid = [];
   for(var i=0; i<10; i++) {
@@ -14,22 +17,90 @@ module.exports = (function() {
     }
     grid.push(col);
   }
-//the ships
-  destroyer = [[2,1],[2,2],[2,3],[2,4]].forEach(function(coords) {
+
+  //random location for destoyer
+  destroyer = [];
+  var direction = Math.floor(Math.random() * 2);
+  for (var i = 0; i < 1; i++) {
+    if (direction === 1) { //horizontal
+      row = Math.floor(Math.random() * 9);
+      var col1 = Math.floor(Math.random() * 6);
+      var col2 = col1 + 1;
+      var col3 = col2 + 1;
+      var col4 = col3 + 1;
+      destroyer.push([row, col1], [row, col2], [row, col3], [row, col4]);
+    } else {
+      var row1 = Math.floor(Math.random() * 6);
+      var row2 = row1 + 1;
+      var row3 = row2 + 1;
+      var row4 = row3 + 1;
+      col = Math.floor(Math.random() * 9);
+      destroyer.push([row1, col],[row2, col],[row3, col],[row4, col]);
+    }
+  };
+  //convert to coords
+  destroyer.forEach(function(coords) {
     grid[coords[0]][coords[1]] = OCCUPIED_BY_SHIP;
-  })
+  });
 
-  destroyer2 = [[4,3],[4,4],[4,5],[4,6]].forEach(function(coords) {
-      grid[coords[0]][coords[1]] = OCCUPIED_BY_SHIP;
-    })
+  //random location for destroyer2
+  destroyer2 = [];
+  var direction = Math.floor(Math.random() * 2);
+  for (var i = 0; i < 1; i++) {
+    if (direction === 1) { //horizontal
+      row = Math.floor(Math.random() * 9);
+      var col1 = Math.floor(Math.random() * 6);
+      var col2 = col1 + 1;
+      var col3 = col2 + 1;
+      var col4 = col3 + 1;
+      destroyer2.push([row, col1], [row, col2], [row, col3], [row, col4]);
+    } else {
+      var row1 = Math.floor(Math.random() * 6);
+      var row2 = row1 + 1;
+      var row3 = row2 + 1;
+      var row4 = row3 + 1;
+      col = Math.floor(Math.random() * 9);
+      destroyer2.push([row1, col],[row2, col],[row3, col],[row4, col]);
+    }
+  };
+//convert to coords
+  destroyer2.forEach(function(coords) {
+    grid[coords[0]][coords[1]] = OCCUPIED_BY_SHIP;
+  });
 
-  battleship = [[7,6],[7,7],[7,8],[7,9],[7,10]].forEach(function(coords) {
-      grid[coords[0]][coords[1]] = OCCUPIED_BY_SHIP;
-    })
+  //random location for battleship
+  battleship = [];
+  var direction = Math.floor(Math.random() * 2);
+  for (var i = 0; i < 1; i++) {
+    if (direction === 1) { //horizontal
+      row = Math.floor(Math.random() * 9);
+      var col1 = Math.floor(Math.random() * 5);
+      var col2 = col1 + 1;
+      var col3 = col2 + 1;
+      var col4 = col3 + 1;
+      var col5 = col4 + 1;
+      battleship.push([row, col1], [row, col2], [row, col3], [row, col4], [row, col5]);
+    } else {
+      var row1 = Math.floor(Math.random() * 5);
+      var row2 = row1 + 1;
+      var row3 = row2 + 1;
+      var row4 = row3 + 1;
+      var row5 = row4 + 1;
+      col = Math.floor(Math.random() * 9);
+      battleship.push([row1, col],[row2, col],[row3, col],[row4, col], [row5, col]);
+    }
+  };
+  //convert to coords
+  battleship.forEach(function(coords) {
+    grid[coords[0]][coords[1]] = OCCUPIED_BY_SHIP;
+  });
 
-  Water.test = function() {
-    return "test";
-  }
+  var ships = [destroyer, destroyer2, battleship];
+  console.log(ships);
+
+  destroyerCoords = ships[0];
+  destroyer2Coords = ships[1];
+  battleshipCoords = ships[2];
 
   var translateColNumber = function(col) {
     switch (col) {
@@ -88,12 +159,10 @@ module.exports = (function() {
     }
     else if (grid[row][col] == OCCUPIED_BY_SHIP ) {
       grid[row][col] = HIT_SHIP;
-      //TODO handle logic of updated ship sunk status
-      //if one of the ships is sunk, result will return 'sunk'
       result = "hit";
     }
-
     console.log(grid);
+
     return result;
   }
 

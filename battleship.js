@@ -1,6 +1,6 @@
 var readline = require('readline')
 const Water = require('./Water.js')
-const Ships = require('./Ships.js')
+
 
 // console.log(Water.test());
 // console.log(Ships.test());
@@ -22,7 +22,6 @@ function quit() {
 
 function restart() {
   // Water.new();
-  Ships.create();
   console.log('New Game');
 }
 
