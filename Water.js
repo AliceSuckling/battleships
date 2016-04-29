@@ -3,8 +3,8 @@ module.exports = (function() {
 
   const OPEN_WATER = 0;
   const OCCUPIED_BY_SHIP = 1;
-  const MISSED_WATER = 2;
-  const HIT_SHIP = 3;
+  const HIT_SHIP = 2;
+  const MISSED_WATER = 3;
 
   const SUNK_DESTROYER = 12;
   const SUNK_BATTLESHIP = 15;
@@ -96,7 +96,7 @@ module.exports = (function() {
   });
 
   var ships = [destroyer, destroyer2, battleship];
-  console.log(ships);
+  // console.log(ships);
 
   destroyerCoords = ships[0];
   destroyer2Coords = ships[1];
@@ -138,7 +138,7 @@ module.exports = (function() {
 
 //check the water based on guess location
   Water.checkAt = function(guess) {
-    console.log(guess);
+    console.log("You tried: " + guess);
     if (guess === null || guess.charAt(2) > 0 ) {
       return "To make a guess of where the ship is located in the water, enter a letter (A - J) and a number (1 - 10)";
     }
@@ -161,8 +161,54 @@ module.exports = (function() {
       grid[row][col] = HIT_SHIP;
       result = "hit";
     }
-    console.log(grid);
+    // console.log(grid);
 
+    //ship coords values - Destroyer
+    firstDestroyerCoords = destroyerCoords[0];
+    secondDestroyerCoords = destroyerCoords[1];
+    thirdDestroyerCoords = destroyerCoords[2];
+    fourthDestroyerCoords = destroyerCoords[3];
+
+    firstDestroyerValue = grid[firstDestroyerCoords[0]][firstDestroyerCoords[1]];
+    secondDestroyerValue = grid[secondDestroyerCoords[0]][secondDestroyerCoords[1]];
+    thirdDestroyerValue = grid[thirdDestroyerCoords[0]][thirdDestroyerCoords[1]];
+    fourthDestroyerValue = grid[fourthDestroyerCoords[0]][fourthDestroyerCoords[1]];
+
+    destroyerValue = (firstDestroyerValue + secondDestroyerValue + thirdDestroyerValue + fourthDestroyerValue) - 4;
+
+    //ship coords values - Destroyer2
+    firstDestroyer2Coords = destroyer2Coords[0];
+    secondDestroyer2Coords = destroyer2Coords[1];
+    thirdDestroyer2Coords = destroyer2Coords[2];
+    fourthDestroyer2Coords = destroyer2Coords[3];
+
+    firstDestroyer2Value = grid[firstDestroyer2Coords[0]][firstDestroyer2Coords[1]];
+    secondDestroyer2Value = grid[secondDestroyer2Coords[0]][secondDestroyer2Coords[1]];
+    thirdDestroyer2Value = grid[thirdDestroyer2Coords[0]][thirdDestroyer2Coords[1]];
+    fourthDestroyer2Value = grid[fourthDestroyer2Coords[0]][fourthDestroyer2Coords[1]];
+
+    destroyer2Value = (firstDestroyer2Value + secondDestroyer2Value + thirdDestroyer2Value + fourthDestroyer2Value) - 4;
+
+    //ship coords values - BattleShip
+    firstBattleshipCoords = battleshipCoords[0];
+    secondBattleshipCoords = battleshipCoords[1];
+    thirdBattleshipCoords = battleshipCoords[2];
+    fourthBattleshipCoords = battleshipCoords[3];
+    fifthBattleshipCoords = battleshipCoords[4];
+
+    firstBattleshipValue = grid[firstBattleshipCoords[0]][firstBattleshipCoords[1]];
+    secondBattleshipValue = grid[secondBattleshipCoords[0]][secondBattleshipCoords[1]];
+    thirdBattleshipValue = grid[thirdBattleshipCoords[0]][thirdBattleshipCoords[1]];
+    fourthBattleshipValue = grid[fourthBattleshipCoords[0]][fourthBattleshipCoords[1]];
+    fifthBattleshipValue = grid[fifthBattleshipCoords[0]][fifthBattleshipCoords[1]];
+
+    battleshipValue = (firstBattleshipValue + secondBattleshipValue + thirdBattleshipValue + fourthBattleshipValue + fifthBattleshipValue) - 5;
+
+    //log score to indicate sunk or not
+    console.log("Destroyer One Hits: " + destroyerValue + "/4");
+    console.log("Destroyer Two Hits: " + destroyer2Value + "/4");
+    console.log("Battleship Hits: " + battleshipValue + "/5");
+    console.log("Result: ");
     return result;
   }
 

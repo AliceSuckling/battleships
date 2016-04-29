@@ -10,7 +10,6 @@ const Water = require('./Water.js')
 function info() {
   console.log('Info:');
   console.log('A5       - hits a target square. Valid targets A-J, 1-10');
-  console.log('restart  - Restarts the game');
   console.log('quit     - Quits the game');
   console.log('info    - Prints this list');
 }
@@ -18,11 +17,6 @@ function info() {
 function quit() {
   console.log('Goodbye!');
   process.exit(0);
-}
-
-function restart() {
-  // Water.new();
-  console.log('New Game');
 }
 
 //command line value to instructions
