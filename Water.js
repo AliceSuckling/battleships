@@ -19,7 +19,7 @@ module.exports = (function() {
   //random location for ships
   destroyer = [];
   destroyer2 = [];
-  battleship = [];
+  // battleship = [];
 
   var space1 = Math.floor(Math.random() * 6); //anywhere allowing for 4 spaces at edge of grid
   var space2 = Math.floor(Math.random() * 9); //anywhere on 10 x 10 grid
@@ -118,7 +118,7 @@ module.exports = (function() {
       grid[row][col] = HIT_SHIP;
       result = "hit";
     }
-    console.log(grid);
+    // console.log(grid);
 
     //ship coords values - Destroyer
     firstDestroyerCoords = destroyer[0];
