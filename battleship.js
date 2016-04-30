@@ -1,10 +1,6 @@
 var readline = require('readline')
 const Water = require('./Water.js')
 
-
-// console.log(Water.test());
-// console.log(Ships.test());
-
 //game play
 
 function info() {
